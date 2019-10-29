@@ -1,1 +1,3 @@
-testing from local new
+<?php
+   echo getenv("DATABASE_HOST");
+?>
