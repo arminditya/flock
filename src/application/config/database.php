@@ -68,20 +68,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | make active.  By default there is only one group (the 'default' group).
 |
 | The $query_builder variables lets you determine whether or not to load
-| the query builder class. 10.1.15.207
+| the query builder class.
 */
 $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	//'hostname' => '10.1.15.207',
-	//'hostname' => 'development',
-	'hostname' => 'suryagumilang.com',
-	'username' => 'suryagum_dtpl',
-	'password' => 'g-(RuzFCehct',
-	'database' => 'suryagum_dtpl',
-	//'database' => 'localdev',
+	'hostname' => 'localhost',
+	'username' => '',
+	'password' => '',
+	'database' => '',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

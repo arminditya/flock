@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//Edited by GGW
-date_default_timezone_set('Asia/Bangkok');
-
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -26,11 +23,7 @@ date_default_timezone_set('Asia/Bangkok');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'http://localhost/dpadigi/';
-//$base  = "http://".$_SERVER['HTTP_HOST'];
-$base  = "http://".$_SERVER['HTTP_HOST'];
-$base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-$config['base_url'] = $base;
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -130,10 +123,9 @@ $config['subclass_prefix'] = 'MY_';
 |
 | Enabling this setting will tell CodeIgniter to look for a Composer
 | package auto-loader script in application/vendor/autoload.php.
-*/
-// $config['composer_autoload'] = TRUE;
-$config['composer_autoload'] = "vendor/autoload.php";
-/*
+|
+|	$config['composer_autoload'] = TRUE;
+|
 | Or if you have your vendor/ directory located somewhere else, you
 | can opt to set a specific path as well:
 |
@@ -529,37 +521,3 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-
-
-/*
-|--------------------------------------------------------------------------
-| SMS API
-|--------------------------------------------------------------------------
-
-*/
-
-// $config['urlAPISMS'] = "https://astraapps.astra.co.id/awo/api/send_sms.php"; // url lama
-// $config['passwordAPISMS'] = 'daP3n45tr43177d4P3n';  // url lama
-
-// $config['userAPISMS'] = 'dpa_api';
-// $config['senderAPISMS'] = 'Dapenastra';
-// $config['passwordAPISMS'] = 'd@N4_p3N5!uN_457rA'; //new
-// $config['urlAPISMS'] = "https://sms.astraworld.com/awo/api/send_sms.php"; //new
-
-//API SMS OTP active on 1 Februari 2019
-//API SMS OTP active on 11 April 2019
-//--- OTP ---//
-$config['userAPISMS'] = 'dpa_otp';
-$config['senderAPISMS'] = 'Dapenastra';
-$config['passwordAPISMS'] = 'dpa_otp123'; //new
-$config['urlAPISMS'] = "https://astraapps.astra.co.id/awosmsapi/clientintegrationservice/api/clientintegration/otp"; //new
-
-//--- REGULER ---//
-// $config['userAPISMS'] = 'dpa_reg';
-// $config['senderAPISMS'] = 'Dapenastra';
-// $config['passwordAPISMS'] = 'dpa_reg123'; //new
-// $config['urlAPISMS'] = "https://astraapps.astra.co.id/awosmsapi/clientintegrationservice/api/clientintegration/regular"; //new
-
-// $config['grocery_crud_file_upload_allow_file_types']   = 'gif|jpeg|jpg|png|tiff|doc|docx|txt|odt|xls|xlsx|pdf|ppt|pptx|pps|ppsx|mp3|m4a|ogg|wav|mp4|m4v|mov|wmv|avi|mpg|ogv|3gp|3g2';
-// $config['grocery_crud_file_upload_max_file_size']	= '30MB'; //ex. '10MB' (Mega Bytes), '1067KB' (Kilo Bytes), '5000B' (Bytes)
-

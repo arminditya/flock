@@ -1231,7 +1231,7 @@ class CI_Form_validation {
 	{
 		if (function_exists('idn_to_ascii') && preg_match('#\A([^@]+)@(.+)\z#', $str, $matches))
 		{
-			$domain = defined('INTL_IDNA_VARIANT_UTS46')
+			$domain = is_php('5.4')
 				? idn_to_ascii($matches[2], 0, INTL_IDNA_VARIANT_UTS46)
 				: idn_to_ascii($matches[2]);
 			$str = $matches[1].'@'.$domain;
