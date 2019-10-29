@@ -76,7 +76,6 @@ $url = parse_url(getenv("DATABASE_URL"));
 
 $db['default'] = array(
 	'dsn'	=> '',
-
 	'hostname' => $url["host"],
 	'username' => $url["user"],
 	'password' => $url["pass"],
