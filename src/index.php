@@ -11,6 +11,8 @@ $pdo = new PDO("pgsql:" . sprintf(
     ltrim($db["path"], "/")
 ));
 
+echo "HERE"; die;
+
 $sql = "SELECT * FROM users";
 $query = $pdo->prepare($sql);
 $rows = $query->execute();
