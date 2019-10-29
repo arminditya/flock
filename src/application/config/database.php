@@ -72,17 +72,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
+$url = parse_url(getenv("DATABASE_URL"));
 
 $db['default'] = array(
 	'dsn'	=> '',
-	//'hostname' => '10.1.15.207',
-	//'hostname' => 'development',
-	'hostname' => 'suryagumilang.com',
-	'username' => 'suryagum_dtpl',
-	'password' => 'g-(RuzFCehct',
-	'database' => 'suryagum_dtpl',
-	//'database' => 'localdev',
-	'dbdriver' => 'mysqli',
+
+	'hostname' => $url["host"],
+	'username' => $url["user"],
+	'password' => $url["pass"],
+	'database' => substr($url["path"], 1),
+	'port'   => 5432,
+	'dbdriver' => 'postgre',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
