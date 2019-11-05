@@ -3,10 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $active_group = 'default';
 $query_builder = TRUE;
-$url = parse_url(DATABASE_URL);
+$url = parse_url(getenv("DATABASE_URL"));
 
 $db['default'] = array(
-	'dsn'	=> '',
 	'hostname' => $url["host"],
 	'username' => $url["user"],
 	'password' => $url["pass"],
