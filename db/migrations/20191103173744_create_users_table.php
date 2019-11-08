@@ -13,7 +13,7 @@ class CreateUsersTable extends AbstractMigration
             ->addColumn('last_name', 'string', ['limit' => 128])
             ->addColumn('created', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('modified_at', 'datetime', ['null' => true])
-            ->addIndex(['username', 'email'], ['unique' => true])
+            ->addIndex(['email'], ['unique' => true])
             ->create();
     }
 }
