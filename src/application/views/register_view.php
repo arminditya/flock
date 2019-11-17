@@ -70,8 +70,8 @@
                   <td width="80%">
                   <select class="form-control" name="jenis_kelamin">
                             <option value="">Pilih Jenis Kelamin</option>
-                              <option value="p">Perempuan</option>
-                              <option value="l">Laki Laki</option>
+                              <option value="P">Perempuan</option>
+                              <option value="L">Laki Laki</option>
                             </select>
                   </td>
                 </tr>
@@ -116,6 +116,17 @@
                                       }
                                     ?>
                                   </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="20%">Tipe Pengguna</td>
+                  <td width="80%">
+                  <select class="form-control" name="role">
+                            <option value="">Pilih Tipe Pengguna</option>
+                              <option value="3">Traveller</option>
+                              <option value="2">Local Guide</option>
+                            </select>
                   </td>
                 </tr>
 

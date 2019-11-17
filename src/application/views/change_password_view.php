@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin DPA | Log in</title>
+  <title>Ganti Password</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -30,7 +30,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo $this->config->base_url();?>"><b>Digi</b>DPA</a>
+    <a href="<?php echo $this->config->base_url();?>"><b>Sisantuy</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -43,7 +43,7 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div> -->
       <div class="form-group has-feedback">
-        <input type="text" name="email" class="form-control" placeholder="Email">
+        <input type="text" name="username" class="form-control" placeholder="Username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
 

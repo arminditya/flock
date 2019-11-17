@@ -4,10 +4,10 @@
     <section class="content-header">
       <h1>
         Welcome on board
-        <small>SIPADOK - TOKOPEDIA</small>
+        <small>SISANTUY - Access</small>
         <br><br>
-        <p>Hi! Selamat datang kembali <?php echo $namauser; ?> (<?php echo $nik; ?>)</p>
-        <p><small>Anda login menggunakan email <?php echo $emailkantor; ?></small></p>
+        <p>Hi! Selamat datang kembali <?php echo $namauser; ?> (<?php echo $username; ?>)</p>
+        <p><small>Anda login menggunakan email <?php echo $email; ?> , sebagai <?php echo $namarole; ?>.</small></p>
         
       </h1>
     </section>

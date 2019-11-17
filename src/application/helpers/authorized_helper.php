@@ -65,22 +65,22 @@
 		try{
 			$ci=& get_instance();
 			// $ci->load->model('user','',TRUE);
-			$ci->load->model('SipadokUser_Model','',TRUE);
+			$ci->load->model('SisantuyUser_Model','',TRUE);
 			$session_data = $ci->session->userdata('logged_in');
 			$username = $session_data['username'];
 			
-			$sql = "SELECT NamaMenu FROM mti.sipadok_menu sm
-			WHERE NamaMenu IN (
-			SELECT NamaMenu FROM mti.sipadok_menu sm
-			JOIN mti.sipadok_rolemenu srm on sm.KdMenu = srm.KdMenu
-			JOIN mti.sipadok_role sr on srm.KdRole = sr.KdRole
-			JOIN mti.sipadok_userrole sur on sr.KdRole = sur.KdRole
-			WHERE sm.Deleted = 0
-			AND srm.Deleted = 0
-			AND sr.Deleted = 0
-			AND sur.Deleted = 0
-			AND sur.NIK = ?
-			AND sm.NamaMenu = ?
+			$sql = "SELECT NAMA_MENU FROM MST_MENU sm
+			WHERE NAMA_MENU IN (
+				SELECT NAMA_MENU FROM MST_MENU sm
+				JOIN TRX_ROLE_MENU srm on sm.ID_MENU = srm.ID_MENU
+				JOIN MST_ROLE sr on srm.ID_ROLE = sr.ID_ROLE
+				JOIN TRX_USER_ROLE sur on sr.ID_ROLE = sur.ID_ROLE
+				WHERE sm.DELETED = 0
+				AND srm.DELETED = 0
+				AND sr.DELETED = 0
+				AND sur.DELETED = 0
+				AND sur.USERNAME = ?
+				AND sm.NAMA_MENU = ?
 			)";
 
 			$query = $ci->db->query($sql, array($username,$NamaMenu));
@@ -98,5 +98,4 @@
 			 return false;
 		}
 	}
-
 }

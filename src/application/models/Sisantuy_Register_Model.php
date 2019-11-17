@@ -116,6 +116,36 @@ Class Sisantuy_Register_Model extends Ci_Model
 		}
 	}
 
+	// function purpose = Menambahkan password pengguna
+	function insertUserRole($iduserrole,$username,$idrole,$createdby)
+	{
+		try{
+			$sql = "INSERT INTO TRX_USER_ROLE
+					(ID_USER_ROLE,USERNAME,ID_ROLE,CREATED_BY, CREATED_ON)
+					VALUES
+					(?,?,?,?,NOW()) 
+					";
+			$query = $this->db->query($sql, array(
+				$iduserrole,
+				$username,
+				$idrole,
+				$createdby,
+			));
+			if($query){
+				// return $query->result();
+				return true;
+			}else{
+				return false;
+			}
+		}
+		catch(Exception $e)
+		{
+			 throw new Exception( 'Something really gone wrong', 0, $e);
+			 log_message( 'error', $e->getMessage( ) . ' in ' . $e->getFile() . ':' . $e->getLine() );
+			 return false;
+		}
+	}
+
 	
 	
 }

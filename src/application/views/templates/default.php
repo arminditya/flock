@@ -55,9 +55,9 @@
     <!-- Logo -->
     <a href="<?php echo $this->config->base_url(); ?>index.php/home" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>S</b>PD</span>
+      <span class="logo-mini"><b>S</b>ac</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>SIPADOK</b></span>
+      <span class="logo-lg"><b>SISANTUY</b> access</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -72,12 +72,21 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Control Sidebar Toggle Button -->
+
+          <!-- BEGIN - GO TO WEBSITE -->
           <li>
-            <!-- <a href="<?php echo $this->config->base_url();?>index.php/home/logout"> Sign out  -->
-            <!-- <a href="https://www.dapenastra.com/dpadigi/index.php/Home/logout"> Sign out -->
+            <a href="<?php echo $this->config->base_url();?>index.php/Home/logout"> Go To Sisantuy
+            <i class="fa fa-globe"></i></a>
+          </li>
+          <!-- BEGIN - GO TO WEBSITE -->
+
+          <!-- BEGIN - LOG OUT BUTTON -->
+          <li>
             <a href="<?php echo $this->config->base_url();?>index.php/Home/logout"> Sign out
             <i class="fa fa-sign-out"></i></a>
           </li>
+          <!-- BEGIN - LOG OUT BUTTON -->
+
         </ul>
       </div>
     </nav>
@@ -93,7 +102,7 @@
         </div>
         <div class="pull-left info">
           <p><?php 
-          $username = $this->session->userdata['logged_in']['namauser'];
+          $username = $this->session->userdata['logged_in']['nama'];
           echo $username; 
           ?></p>
           <!-- Begin - Ini untuk nama mitra -->
@@ -117,7 +126,7 @@
       
         <?php foreach($menus as $menu){?>
       <!-- ================== LOOP THIS SECTION WITH ROLE MENU============================= -->
-      <?php if($menu->KdMenu == 'webDPAdigi0008') { ?>
+      <?php if($menu->ID_MENU == 'webDPAdigi0008') { ?>
           <li>
               <a href="<?php echo $this->config->base_url();?>index.php/<?php echo $menu->Url ?>">
                 <i class="<?php echo $menu->IconMenu ?>"></i> <span><?php echo $menu->NamaMenu ?> 
@@ -131,7 +140,7 @@
               </a>
           </li>
 
-        <?php } else if($menu->KdMenu == 'webDPAdigi0017') { ?>
+        <?php } else if($menu->ID_MENU == 'webDPAdigi0017') { ?>
           <li>
               <a href="<?php echo $this->config->base_url();?>index.php/<?php echo $menu->Url ?>">
                 <i class="<?php echo $menu->IconMenu ?>"></i> <span><?php echo $menu->NamaMenu ?> 
@@ -146,8 +155,8 @@
           </li>
       <?php } else { ?>
         <li>
-              <a href="<?php echo $this->config->base_url();?>index.php/<?php echo $menu->Url ?>">
-                <i class="<?php echo $menu->Icon ?>"></i> <span><?php echo $menu->NamaMenu ?></span>
+              <a href="<?php echo $this->config->base_url();?>index.php/<?php echo $menu->URL ?>">
+                <i class="<?php echo $menu->ICON ?>"></i> <span><?php echo $menu->NAMA_MENU ?></span>
                 <span class="pull-right-container">
 
                   <i class="fa pull-right"></i>
@@ -181,7 +190,7 @@
       <!-- Last update 05-05-2019 19.49 -->
       <b>Version</b> 1.0
     </div>
-    <strong>Copyright &copy; 2019 <a href="https://dapenastra.com/">Tokopedia</a>.</strong> All rights
+    <strong>Copyright &copy; 2019 <a href="https://dapenastra.com/">SISANTUY TEAM</a>.</strong> All rights
     reserved.
   </footer>
   <!-- /.control-sidebar -->

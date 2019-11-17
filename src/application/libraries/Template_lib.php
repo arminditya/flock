@@ -9,6 +9,7 @@ class Template_lib {
         $this->CI =& get_instance();
         $this->CI->load->model('User','',TRUE);
         $this->CI->load->model('SipadokUser_Model','',TRUE);
+        $this->CI->load->model('SisantuyUser_Model','',TRUE);
         // $this->CI->load->model('Grup','',TRUE);
     }
     
@@ -21,7 +22,8 @@ class Template_lib {
     {
         $session_data = $this->CI->session->userdata('logged_in');
         // $result = $this->CI->User->getMenu($session_data['username']);   
-        $result = $this->CI->SipadokUser_Model->getMenu($session_data['username']);   
+        // $result = $this->CI->SipadokUser_Model->getMenu($session_data['username']);   
+        $result = $this->CI->SisantuyUser_Model->getMenu($session_data['username']);   
         // $grupMenu = $this->CI->Grup->check_event_authorized_user($session_data['username']);
 
         // $event_notif_count = $this->CI->User->getEventNotifCount(); 

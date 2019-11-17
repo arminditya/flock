@@ -6,10 +6,10 @@ class VerifyLogin extends CI_Controller {
     function __construct()
     {
       parent::__construct();
-      $this->load->model('User','',TRUE);
-      $this->load->model('SipadokUser_Model','',TRUE);
-      $this->load->model('Kode_Model');
-      $this->load->model('SipadokKode_Model');
+    //   $this->load->model('User','',TRUE);
+    //   $this->load->model('SipadokUser_Model','',TRUE);
+    //   $this->load->model('Kode_Model');
+    //   $this->load->model('SipadokKode_Model');
       $this->load->model('SipadokLogLogin_Model');
       $this->load->model('Sisantuy_Register_Model');
       $this->load->model('SisantuyUser_Model');
@@ -28,10 +28,15 @@ class VerifyLogin extends CI_Controller {
 
         
         $urlTujuan = $this->input->post('url');
+        // print(" | URL tujuan = ".$urlTujuan." | ");
         if($urlTujuan == ''){
            $urlTujuan = 'home';
         }
-        
+        // print(" | URL tujuan = ".$urlTujuan." | ");
+        // die();
+        // print(base_url());
+        // die();
+
         if($this->form_validation->run() == false){
             //Field validation failed.  User redirected to login page
             $data = array(
@@ -54,41 +59,42 @@ class VerifyLogin extends CI_Controller {
 
     function check_database($password)
     {
-        // $username = $this->input->post('username');
-        $email = $this->input->post('email');
-        $result = $this->SipadokUser_Model->login($email, $password);
+        $username = $this->input->post('username');
+        // $email = $this->input->post('email');
+        
+        $result = $this->SisantuyUser_Model->login($username, $password);
+        // var_dump($result);
+        // die();
+        $change_password = $this->SisantuyUser_Model->check_default_password($username, $password);
 
-        $change_password = $this->SipadokUser_Model->check_default_password($email, $password);
+        if($change_password){
+            $pass = "";
+            $pass_default = "";
 
-        if($change_password)
-        {
-            foreach($change_password as $row)
-            {
-                $pass = $row->Pswd;
-                $pass_default = $row->PswdDefault;
+            foreach($change_password as $row){
+                $pass = $row->PSSWD;
+                $pass_default = $row->PSSWD_DEFAULT;
             }
 
-            if($pass == $pass_default)
-            {
-                //redirect('change_password');
+            // print(" Password Default = ".$pass);
+            // print(" Password = ".$pass_default);
+
+            if($pass == $pass_default){
                 redirect(base_url('index.php/Change_Password'));
             }
+
             else
             {
-                if($result)
-                {
+                if($result){
                 $sess_array = array();
-                // print_r($result);
-                // die;
                     foreach($result as $row)
                     {
                     
                     $sess_array = array(
-                        'nik' => $row->NIK,
-                        'username' => $row->NIK,//Email kantor juga dianggap sebagai username
-                        'namauser' => $row->NamaUser,
-                        'emailkantor' => $row->EmailKantor,
-                        'emailpribadi' => $row->EmailPribadi
+                        'username' => $row->USERNAME,
+                        'nama' => $row->NAMA,
+                        'email' => $row->EMAIL,
+                        'no_hp' => $row->NO_HP
                     );
                     }
                      $this->session->set_userdata('logged_in', $sess_array);
@@ -106,16 +112,23 @@ class VerifyLogin extends CI_Controller {
         }
     }
 
+    // function purpose = Untuk ganti password
     function change_password()
     {
         $this->load->library('form_validation');
         
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('old_password', 'Password', 'required|callback_check_old_password');
-        $this->form_validation->set_rules('new_password', 'Password', 'required');
-        $this->form_validation->set_rules('renew_password', 'Password', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        // $this->form_validation->set_rules('old_password', 'Password', 'required|callback_check_old_password');
+        $this->form_validation->set_rules('old_password', 'Old Password', 'required');
+        $this->form_validation->set_rules('new_password', 'New Password', 'required');
+        $this->form_validation->set_rules('renew_password', 'Re-New Password', 'required');
 
-        $email = $this->input->post('email');
+        $username = $this->input->post('username');
+        $old_password = $this->input->post('old_password');
+        $new_password = $this->input->post('new_password');
+        $renew_password = $this->input->post('renew_password');
+
+        $this->check_old_password($username,$old_password,$new_password,$renew_password);
 
         if($this->form_validation->run() == false)
         {
@@ -127,6 +140,32 @@ class VerifyLogin extends CI_Controller {
             //redirect('login');
             redirect(base_url('index.php/login'));
         }
+    }
+
+    // function purpose = Untuk checking password lama
+    function check_old_password($username,$old_password,$new_password,$renew_password)
+    {
+        // Jika new_password == renew_password
+        if($new_password == $renew_password){
+            $result = $this->SisantuyUser_Model->login($username, $old_password);
+            if($result){
+                $update_password = $this->SisantuyUser_Model->update_password($username, $new_password);
+                if( $update_password ){
+                    return true;
+                }else{
+                    $this->form_validation->set_message('check_old_password', 'Error change password');
+                    return false;
+                }
+            }else{
+                $this->form_validation->set_message('check_old_password', 'Invalid Username or password!');
+                return false;
+            }
+
+        }else{
+            $this->form_validation->set_message('check_old_password', 'Your new password does not match!');
+            return false;
+        }
+
     }
 	
 	function forgot_password()
@@ -210,6 +249,7 @@ class VerifyLogin extends CI_Controller {
         $d_lahir = $this->input->post('d_lahir');
         $m_lahir = $this->input->post('m_lahir');
         $y_lahir = $this->input->post('y_lahir');
+        $role = $this->input->post('role');
         $password = $this->input->post('password');
         $repassword = $this->input->post('repassword');
 
@@ -251,45 +291,16 @@ class VerifyLogin extends CI_Controller {
             $tgl_lahir,
             $created_by
         );
-        $insertUserPassword =  $this->Sisantuy_Register_Model->insertUserPassword(
+        $insertUserPassword = $this->Sisantuy_Register_Model->insertUserPassword(
             $username,
             $password,
             $password,
             $created_by
         );
+        $iduserrole = $this->Sisantuy_KodeGenerator_Model->getIdUserRole();
+        $insertUserRole = $this->Sisantuy_Register_Model->insertUserRole($iduserrole,$username,$role,$username);
 
         return $this->load->view('login_view');
-
-    }
-
-    function check_old_password($old_password)
-    {
-        $emailkantor = $this->input->post('email');
-        $new_password = $this->input->post('new_password');
-        $renew_password = $this->input->post('renew_password');
-
-        if($new_password == $renew_password){
-
-            $result = $this->SipadokUser_Model->login($emailkantor, $old_password);
-            if($result){
-                $update_password = $this->SipadokUser_Model->update_password($emailkantor, $new_password);
-                if( $update_password ){
-                    return true;
-                }else{
-                    $this->form_validation->set_message('check_old_password', 'Error change password');
-                    return false;
-                }
-            }else{
-                $this->form_validation->set_message('check_old_password', 'Invalid Username or password!');
-                return false;
-            }
-
-        }else{
-            $this->form_validation->set_message('check_old_password', 'Your new password does not match!');
-            return false;
-        }
-
-        
 
     }
 

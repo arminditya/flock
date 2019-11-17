@@ -33,7 +33,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo $this->config->base_url();?>"><b>SISANTUY</b> CMS</a>
+    <a href="<?php echo $this->config->base_url();?>"><b>SISANTUY</b> Access</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
